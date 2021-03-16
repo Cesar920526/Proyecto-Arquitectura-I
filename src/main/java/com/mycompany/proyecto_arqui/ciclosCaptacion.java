@@ -8,18 +8,16 @@ package com.mycompany.proyecto_arqui;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author ASUS X509L
  */
 public class ciclosCaptacion extends javax.swing.JFrame {
-    String codigos="";
+
+    String codigos = "";
     String[] test;
     String[] test1;
-    int pc, contador=0;
-    
-    
+    int pc, contador = 0, resultado;
 
     /**
      * Creates new form ciclosCaptacion
@@ -30,70 +28,65 @@ public class ciclosCaptacion extends javax.swing.JFrame {
         valInstruccion();
         valDatos();
         sacaValores();
-        
-       
+
     }
-    
-    public void valInstruccion(){
-        int numInstruccion = (int)(Math.random()*(200-399)+399);
+
+    public void valInstruccion() {
+        int numInstruccion = (int) (Math.random() * (200 - 399) + 399);
         Object[] model = new Object[2];
         Object[] modelEjecucion = new Object[3];
-        
-        
-        for(int i= 0; i<5; i++){
+
+        for (int i = 0; i < 5; i++) {
             model[0] = String.valueOf(numInstruccion++);
             model[1] = "";
-            ((DefaultTableModel)tblMemoriaInstruccion.getModel()).addRow(model);
+            ((DefaultTableModel) tblMemoriaInstruccion.getModel()).addRow(model);
         }
-        
-        String valorInicial = (String)tblMemoriaInstruccion.getValueAt(0, 0);
+
+        String valorInicial = (String) tblMemoriaInstruccion.getValueAt(0, 0);
         pc = Integer.parseInt(valorInicial);
-        
+
         modelEjecucion[0] = String.valueOf(valorInicial);
         modelEjecucion[1] = "";
-        modelEjecucion[2] = "";            
-        ((DefaultTableModel)tblEjecucion.getModel()).addRow(modelEjecucion);       
+        modelEjecucion[2] = "";
+        ((DefaultTableModel) tblEjecucion.getModel()).addRow(modelEjecucion);
     }
-    
-    
-    public void valDatos(){
-        int numDatos = (int)(Math.random()*(400-499)+499);
-        
+
+    public void valDatos() {
+        int numDatos = (int) (Math.random() * (400 - 499) + 499);
+
         Object[] model = new Object[2];
-        
-        for(int i= 0; i<10; i++){
-            int numDatos1 = (int)(Math.random()*(1-1000)+1000);
+
+        for (int i = 0; i < 10; i++) {
+            int numDatos1 = (int) (Math.random() * (1 - 1000) + 1000);
             model[0] = String.valueOf(numDatos++);
             model[1] = String.valueOf(numDatos1);
-            
-           ((DefaultTableModel)tblMemoriaDatos.getModel()).addRow(model);
+
+            ((DefaultTableModel) tblMemoriaDatos.getModel()).addRow(model);
         }
     }
-    
-    public void sacaValores(){
-        
+
+    public void sacaValores() {
+
         int fila = tblcodigos.getRowCount();
-        int fila1= tblMemoriaDatos.getRowCount();
-        String instrucciones="", valor="", codigo="", datos="", valorDatos="";
-        
-        for(int i=0;i<fila;i++){
-            codigo  = (String)tblcodigos.getValueAt(i, 0);
+        int fila1 = tblMemoriaDatos.getRowCount();
+        String instrucciones = "", valor = "", codigo = "", datos = "", valorDatos = "";
+
+        for (int i = 0; i < fila; i++) {
+            codigo = (String) tblcodigos.getValueAt(i, 0);
             codigos += codigo;
         }
-        
-        for(int i=0;i<fila1;i++){
-            datos  = (String)tblMemoriaDatos.getValueAt(i, 0);
-            valorDatos = (String)tblMemoriaDatos.getValueAt(i, 1);
+
+        for (int i = 0; i < fila1; i++) {
+            datos = (String) tblMemoriaDatos.getValueAt(i, 0);
+            valorDatos = (String) tblMemoriaDatos.getValueAt(i, 1);
             instrucciones += datos + "-";
             valor += valorDatos + "-";
         }
-        
+
         test = instrucciones.split("-");
         test1 = valor.split("-");
-        
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,10 +200,10 @@ public class ciclosCaptacion extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -283,42 +276,91 @@ public class ciclosCaptacion extends javax.swing.JFrame {
 
     private void btnejecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnejecutarActionPerformed
         pc++;
-        int ir=(Integer)tblMemoriaInstruccion.getValueAt(contador, 1);
-        
+        int ir = (Integer) tblMemoriaInstruccion.getValueAt(contador, 1);
+
         Object[] modelEjecucion = new Object[3];
-                
+
         modelEjecucion[0] = String.valueOf(pc);
         modelEjecucion[1] = String.valueOf(operacionAc(ir));
-        modelEjecucion[2] = String.valueOf(ir);            
-        ((DefaultTableModel)tblEjecucion.getModel()).addRow(modelEjecucion);
+        modelEjecucion[2] = String.valueOf(ir);
+        ((DefaultTableModel) tblEjecucion.getModel()).addRow(modelEjecucion);
         contador++;
     }//GEN-LAST:event_btnejecutarActionPerformed
 
-    public double operacionAc(int a){
-        int numero1=a/1000;
-        int numero2=a%1000;
-        
-        
-        switch(numero1){
+    public double operacionAc(int a) {
+        int numero1 = a / 1000;
+        int numero2 = a % 1000;
+
+        switch (numero1) {
             case 1:
-                for(int i=0;i<10;i++){
-                    if(numero2==(Integer.parseInt(test[i]))){
-                        return Integer.parseInt(test1[i]);
+                for (int i = 0; i < 10; i++) {
+                    if (numero2 == (Integer.parseInt(test[i]))) {
+                        resultado = Integer.parseInt(test1[i]);
+                        return resultado;
+                    }
+                }
+            break;
+
+            case 2:
+                if (tblEjecucion.getValueAt(0, 1)==null) {
+                    for (int i = 0; i < 10; i++) {
+                        if (numero2 == (Integer.parseInt(test[i]))) {
+                            resultado = Integer.parseInt(test1[i]);
+                            tblMemoriaDatos.setValueAt(resultado, i, 1);
+                            return resultado;
+                        }
+                    }
+                    
+                }else {
+                    for (int i = 0; i < 10; i++) {
+                        if (numero2 == (Integer.parseInt(test[i]))) {
+                            tblMemoriaDatos.setValueAt(resultado, i, 1);
+                            return resultado;
+                        }
+                    }
+                }
+            break;
+
+            case 3:
+                for (int i = 0; i < 10; i++) {
+                    if (numero2 == (Integer.parseInt(test[i]))) {
+                        resultado -= Integer.parseInt(test1[i]);
+                        return resultado;
                     }
                 }
             break;
             
-            case 2:
-                
+            case 4:
+                for (int i = 0; i < 10; i++) {
+                    if (numero2 == (Integer.parseInt(test[i]))) {
+                        resultado += Integer.parseInt(test1[i]);
+                        return resultado;
+                    }
+                }
             break;
             
-            case 3:
-                
+            case 5:
+                for (int i = 0; i < 10; i++) {
+                    if (numero2 == (Integer.parseInt(test[i]))) {
+                        resultado *= Integer.parseInt(test1[i]);
+                        return resultado;
+                    }
+                }
+            break;
+            
+            case 6:
+                for (int i = 0; i < 10; i++) {
+                    if (numero2 == (Integer.parseInt(test[i]))) {
+                        resultado /= Integer.parseInt(test1[i]);
+                        return resultado;
+                    }
+                }
             break;
         }
-        
+
         return 0;
     }
+
     /**
      * @param args the command line arguments
      */
