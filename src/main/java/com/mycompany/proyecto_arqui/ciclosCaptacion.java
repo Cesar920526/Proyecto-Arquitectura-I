@@ -17,7 +17,7 @@ public class ciclosCaptacion extends javax.swing.JFrame {
     String codigos = "";
     String[] test;
     String[] test1;
-    int pc, contador = 0, resultado;
+    int pc, contador = 0, count = 0, resultado;
 
     /**
      * Creates new form ciclosCaptacion
@@ -298,66 +298,74 @@ public class ciclosCaptacion extends javax.swing.JFrame {
                 for (int i = 0; i < 10; i++) {
                     if (numero2 == (Integer.parseInt(test[i]))) {
                         resultado = Integer.parseInt(test1[i]);
+                        count++;
                         return resultado;
                     }
                 }
-            break;
+                break;
 
             case 2:
-                if (tblEjecucion.getValueAt(0, 1).equals("")) {
-                    for (int i = 0; i < 10; i++) {
-                        if (numero2 == (Integer.parseInt(test[i]))) {
-                            resultado = Integer.parseInt(test1[i]);
-                            tblMemoriaDatos.setValueAt(resultado, i, 1);
+                System.out.println(count);
+                if (tblEjecucion.getValueAt(count, 1).equals("")) {
+                    for (int j = 0; j < 10; j++) {
+                        if (numero2 == (Integer.parseInt(test[j]))) {
+                            resultado = Integer.parseInt(test1[j]);
+                            tblMemoriaDatos.setValueAt(resultado, j, 1);
+                            count++;
                             return resultado;
                         }
                     }
-                    
-                }else {
-                    for (int i = 0; i < 10; i++) {
-                        if (numero2 == (Integer.parseInt(test[i]))) {
-                            tblMemoriaDatos.setValueAt(resultado, i, 1);
+
+                } else {
+                    for (int j = 0; j < 10; j++) {
+                        if (numero2 == (Integer.parseInt(test[j]))) {
+                            tblMemoriaDatos.setValueAt(resultado, j, 1);
+                            count++;
                             return resultado;
                         }
                     }
                 }
-            break;
+                break;
 
             case 3:
                 for (int i = 0; i < 10; i++) {
                     if (numero2 == (Integer.parseInt(test[i]))) {
                         resultado -= Integer.parseInt(test1[i]);
+                        count++;
                         return resultado;
                     }
                 }
-            break;
-            
+                break;
+
             case 4:
                 for (int i = 0; i < 10; i++) {
                     if (numero2 == (Integer.parseInt(test[i]))) {
                         resultado += Integer.parseInt(test1[i]);
+                        count++;
                         return resultado;
                     }
                 }
-            break;
-            
+                break;
+
             case 5:
                 for (int i = 0; i < 10; i++) {
                     if (numero2 == (Integer.parseInt(test[i]))) {
                         resultado *= Integer.parseInt(test1[i]);
+                        count++;
                         return resultado;
                     }
                 }
-            break;
-            
+                break;
+
             case 6:
                 for (int i = 0; i < 10; i++) {
                     if (numero2 == (Integer.parseInt(test[i]))) {
                         resultado /= Integer.parseInt(test1[i]);
+                        count++;
                         return resultado;
                     }
                 }
-            break;
+                break;
         }
 
         return 0;
